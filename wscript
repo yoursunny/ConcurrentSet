@@ -6,13 +6,13 @@ APPNAME='ConcurrentSet'
 from waflib import Build, Utils, Logs
 
 def options(opt):
-    opt.load('compiler_c')
+    opt.load(['compiler_c', 'gnu_dirs'])
 
     opt.add_option('--with-tests', action='store_true', dest='with_tests', help='''build unit tests''')
     opt.add_option('--debug', action='store_true', dest='debug', help='''debugging mode''')
 
 def configure(conf):
-    conf.load("compiler_c")
+    conf.load(['compiler_c', 'gnu_dirs'])
 
     conf.env.append_value('CFLAGS', ['-std=gnu99'])
 
@@ -30,7 +30,10 @@ def build (bld):
     bld(target='concurrent-set',
         features='c cstlib',
         source=bld.path.ant_glob(['src/*.c']),
-        includes='src')
+        includes='src',
+        install_path='${LIBDIR}')
+
+    bld.install_files('${INCLUDEDIR}', 'src/concurrent-set.h', cwd='src')
 
     if bld.env['WITH_TESTS']:
         bld(target='unit-tests',
