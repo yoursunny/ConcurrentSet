@@ -1,0 +1,3 @@
+[submodule "cityhash-c"]
+	path = cityhash-c
+	url = https://github.com/nusov/cityhash-c.git

@@ -29,7 +29,7 @@ def configure(conf):
 def build (bld):
     bld(target='concurrent-set',
         features='c cstlib',
-        source=bld.path.ant_glob(['src/*.c']),
+        source=bld.path.ant_glob(['src/*.c', 'cityhash-c/city.c']),
         includes='src',
         install_path='${LIBDIR}')
 
