@@ -16,6 +16,8 @@ def configure(conf):
 
     conf.env.append_value('CFLAGS', ['-std=gnu99'])
 
+    conf.check(lib=['pthread'], uselib_store='PTHREAD')
+
     if conf.options.debug:
         conf.define('_DEBUG', 1)
         conf.env.append_value('CFLAGS', ['-O0', '-Wall', '-Werror', '-g3'])
@@ -26,10 +28,11 @@ def configure(conf):
         conf.env['WITH_TESTS'] = True
         conf.check_cc(lib='cunit', include='CUnit/CUnit.h', uselib_store='CUNIT', mandatory=True)
 
-def build (bld):
+def build(bld):
     bld(target='concurrent-set',
         features='c cstlib',
         source=bld.path.ant_glob(['src/*.c', 'cityhash-c/city.c']),
+        use='PTHREAD',
         includes='src',
         install_path='${LIBDIR}')
 
