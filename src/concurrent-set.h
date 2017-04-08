@@ -11,6 +11,7 @@ typedef struct config
 
 typedef struct set
 {
+  struct Hashtable* ht;
 } set;
 
 set*

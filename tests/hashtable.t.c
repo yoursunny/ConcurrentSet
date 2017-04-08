@@ -1,7 +1,7 @@
 #include "hashtable.h"
 #include <CUnit/CUnit.h>
 
-void
+static void
 test_basic(void)
 {
   Hashtable* ht = Hashtable_new();
@@ -25,7 +25,7 @@ test_basic(void)
   Hashtable_dtor(ht);
 }
 
-void
+static void
 test_resize(void)
 {
   char s[5];
@@ -70,7 +70,7 @@ typedef struct ThreadArg
   int* winners; ///< thread id when the operation returning true for the first time
 } ThreadArg;
 
-void
+static void
 threadTest_incrementCounter(ThreadArg* arg, int i)
 {
   if (atomic_fetch_add(&arg->counters[i], 1) == 0) {
@@ -78,7 +78,7 @@ threadTest_incrementCounter(ThreadArg* arg, int i)
   }
 }
 
-void
+static void
 threadTest_checkWinners(int* winners)
 {
   // While it's possible for a single thread to 'win' every time,
@@ -124,7 +124,7 @@ threadTest_checkWinners(int* winners)
   free(winners); \
   Hashtable_dtor(ht)
 
-void*
+static void*
 insertThread(void* arg1)
 {
   ThreadArg* arg = (ThreadArg*)arg1;
@@ -140,7 +140,7 @@ insertThread(void* arg1)
   return NULL;
 }
 
-void
+static void
 test_thread_insert(void)
 {
   Hashtable* ht = Hashtable_new();
@@ -158,7 +158,7 @@ test_thread_insert(void)
   threadTest_end();
 }
 
-void*
+static void*
 queryThread(void* arg1)
 {
   ThreadArg* arg = (ThreadArg*)arg1;
@@ -174,7 +174,7 @@ queryThread(void* arg1)
   return NULL;
 }
 
-void
+static void
 test_thread_query(void)
 {
   Hashtable* ht = Hashtable_new();
@@ -194,7 +194,7 @@ test_thread_query(void)
   threadTest_end();
 }
 
-void*
+static void*
 eraseThread(void* arg1)
 {
   ThreadArg* arg = (ThreadArg*)arg1;
@@ -210,7 +210,7 @@ eraseThread(void* arg1)
   return NULL;
 }
 
-void
+static void
 test_thread_erase(void)
 {
   Hashtable* ht = Hashtable_new();
