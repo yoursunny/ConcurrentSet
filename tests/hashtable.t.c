@@ -1,7 +1,8 @@
 #include "hashtable.h"
 #include <CUnit/CUnit.h>
 
-void test_basic(void)
+void
+test_basic(void)
 {
   Hashtable* ht = Hashtable_new();
   CU_ASSERT_PTR_NOT_NULL_FATAL(ht);
@@ -24,7 +25,8 @@ void test_basic(void)
   Hashtable_dtor(ht);
 }
 
-void test_resize(void)
+void
+test_resize(void)
 {
   char s[5];
   Hashtable* ht = Hashtable_new();
@@ -57,7 +59,8 @@ void test_resize(void)
   Hashtable_dtor(ht);
 }
 
-void suite_hashtable(void)
+void
+suite_hashtable(void)
 {
   CU_pSuite suite = CU_add_suite("hashtable", NULL, NULL);
   CU_add_test(suite, "basic", test_basic);

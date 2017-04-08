@@ -1,10 +1,14 @@
 #include <CUnit/CUnit.h>
 #include <CUnit/Automated.h>
 
-void suite_api(void);
-void suite_hashtable(void);
+void
+suite_api(void);
 
-int main(void)
+void
+suite_hashtable(void);
+
+int
+main(void)
 {
 	CU_initialize_registry();
 
