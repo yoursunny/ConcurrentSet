@@ -1,5 +1,5 @@
+#include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
-#include <CUnit/Automated.h>
 
 void
 suite_api(void);
@@ -15,8 +15,9 @@ main(void)
 	suite_api();
 	suite_hashtable();
 
-	CU_automated_run_tests();
-	CU_list_tests_to_file();
+	CU_basic_set_mode(CU_BRM_VERBOSE);
+	CU_basic_run_tests();
+	//CU_list_tests_to_file();
 	CU_cleanup_registry();
 	return 0;
 }
